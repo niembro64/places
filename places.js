@@ -1,143 +1,15 @@
 "use strict";
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 exports.__esModule = true;
-exports.getIndexesOfMax = exports.getIndexOfMax = exports.getFourthLargest = exports.getThirdLargest = exports.getSecondLargest = exports.getFirstLargest = void 0;
-var getFirstLargest = function (arr) {
-    var largest = arr[0];
-    for (var i = 1; i < arr.length; i++) {
-        if (arr[i] > largest) {
-            largest = arr[i];
-        }
-    }
-    return largest;
-};
-exports.getFirstLargest = getFirstLargest;
-var getSecondLargest = function (arr) {
-    var largest = arr[0];
-    var secondLargest = arr[1];
-    if (largest < secondLargest) {
-        largest = arr[1];
-        secondLargest = arr[0];
-    }
-    for (var i = 2; i < arr.length; i++) {
-        if (arr[i] > largest) {
-            secondLargest = largest;
-            largest = arr[i];
-        }
-        else if (arr[i] > secondLargest) {
-            secondLargest = arr[i];
-        }
-    }
-    return secondLargest;
-};
-exports.getSecondLargest = getSecondLargest;
-var getThirdLargest = function (arr) {
-    var largest = arr[0];
-    var secondLargest = arr[1];
-    var thirdLargest = arr[2];
-    if (largest < secondLargest) {
-        largest = arr[1];
-        secondLargest = arr[0];
-    }
-    if (secondLargest < thirdLargest) {
-        if (largest < thirdLargest) {
-            secondLargest = largest;
-            largest = arr[2];
-        }
-        else {
-            secondLargest = thirdLargest;
-            thirdLargest = arr[1];
-        }
-    }
-    for (var i = 3; i < arr.length; i++) {
-        if (arr[i] > largest) {
-            thirdLargest = secondLargest;
-            secondLargest = largest;
-            largest = arr[i];
-        }
-        else if (arr[i] > secondLargest) {
-            thirdLargest = secondLargest;
-            secondLargest = arr[i];
-        }
-        else if (arr[i] > thirdLargest) {
-            thirdLargest = arr[i];
-        }
-    }
-    return thirdLargest;
-};
-exports.getThirdLargest = getThirdLargest;
-var getFourthLargest = function (arr) {
-    var largest = arr[0];
-    var secondLargest = arr[1];
-    var thirdLargest = arr[2];
-    var fourthLargest = arr[3];
-    if (largest < secondLargest) {
-        largest = arr[1];
-        secondLargest = arr[0];
-    }
-    if (secondLargest < thirdLargest) {
-        if (largest < thirdLargest) {
-            secondLargest = largest;
-            largest = arr[2];
-        }
-        else {
-            secondLargest = thirdLargest;
-            thirdLargest = arr[1];
-        }
-    }
-    if (thirdLargest < fourthLargest) {
-        if (secondLargest < fourthLargest) {
-            if (largest < fourthLargest) {
-                thirdLargest = secondLargest;
-                secondLargest = largest;
-                largest = arr[3];
-            }
-            else {
-                thirdLargest = secondLargest;
-                secondLargest = fourthLargest;
-                fourthLargest = arr[2];
-            }
-        }
-        else {
-            thirdLargest = fourthLargest;
-            fourthLargest = arr[2];
-        }
-    }
-    for (var i = 4; i < arr.length; i++) {
-        if (arr[i] > largest) {
-            fourthLargest = thirdLargest;
-            thirdLargest = secondLargest;
-            secondLargest = largest;
-            largest = arr[i];
-        }
-        else if (arr[i] > secondLargest) {
-            fourthLargest = thirdLargest;
-            thirdLargest = secondLargest;
-            secondLargest = arr[i];
-        }
-        else if (arr[i] > thirdLargest) {
-            fourthLargest = thirdLargest;
-            thirdLargest = arr[i];
-        }
-        else if (arr[i] > fourthLargest) {
-            fourthLargest = arr[i];
-        }
-    }
-    return fourthLargest;
-};
-exports.getFourthLargest = getFourthLargest;
-var getIndexOfMax = function (arr) {
-    var max = arr[0];
-    var maxIndex = 0;
-    for (var i = 1; i < arr.length; i++) {
-        if (arr[i] > max) {
-            maxIndex = i;
-            max = arr[i];
-        }
-    }
-    arr[maxIndex] = -1;
-    return maxIndex;
-};
-exports.getIndexOfMax = getIndexOfMax;
+exports.getDuplicatesIndexes = exports.hasDuplicates = exports.getIndexesOfMax = void 0;
 var getIndexesOfMax = function (arr) {
     var max = arr[0];
     var maxIndexes = [0];
@@ -156,17 +28,52 @@ var getIndexesOfMax = function (arr) {
     return maxIndexes;
 };
 exports.getIndexesOfMax = getIndexesOfMax;
-var x = [10, 20, 30, 20, 30, 100];
-var p = [0, 0, 0, 0, 0, 0];
-// while x has at least positive numbers in it
-var pos = 0;
-while (x.some(function (v) { return v > 0; })) {
-    var i = (0, exports.getIndexesOfMax)(x);
-    pos++;
-    for (var j = 0; j < i.length; j++) {
-        p[i[j]] = pos;
+var getPositions = function (i) {
+    var input = __spreadArray([], i, true);
+    var output = [];
+    for (var i_1 = 0; i_1 < input.length; i_1++) {
+        output.push(0);
     }
-    console.log('p', p);
-    console.log('x', x);
-    console.log();
+    var position = 0;
+    while (input.some(function (v) { return v > 0; })) {
+        var indexes = (0, exports.getIndexesOfMax)(input);
+        position++;
+        for (var j = 0; j < indexes.length; j++) {
+            output[indexes[j]] = position;
+        }
+        console.log('p', output);
+        console.log('x', input);
+        console.log();
+    }
+    return output;
+};
+var hasDuplicates = function (array) {
+    return new Set(array).size !== array.length;
+};
+exports.hasDuplicates = hasDuplicates;
+var getDuplicatesIndexes = function (array) {
+    var duplicates = [];
+    var sorted_arr = array.slice().sort();
+    var results = [];
+    for (var i = 0; i < sorted_arr.length - 1; i++) {
+        if (sorted_arr[i + 1] == sorted_arr[i]) {
+            results.push(sorted_arr[i]);
+        }
+    }
+    return results;
+};
+exports.getDuplicatesIndexes = getDuplicatesIndexes;
+var x = [
+    [2, 2, 3, 1],
+    [1, 2, 2, 4],
+    [2, 2, 2, 2],
+];
+var index = 0;
+var posPlayers = getPositions(x[index]);
+while ((0, exports.hasDuplicates)(posPlayers)) {
+    index++;
+    posPlayers = getPositions(x[index]);
 }
+console.log((0, exports.getDuplicatesIndexes)(x[0]));
+console.log((0, exports.getDuplicatesIndexes)(x[1]));
+console.log((0, exports.getDuplicatesIndexes)(x[2]));
