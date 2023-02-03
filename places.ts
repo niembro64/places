@@ -41,9 +41,9 @@ const getPositions = (i: number[]): number[] => {
   return output;
 };
 
-export const hasDuplicates = (array: number[]): boolean => {
-  return new Set(array).size !== array.length;
-};
+// export const hasDuplicates = (array: number[]): boolean => {
+//   return new Set(array).size !== array.length;
+// };
 
 // let x: number[][] = [
 //   [2, 2, 3, 1],
@@ -72,29 +72,29 @@ let players: Player[] = [
 // if there are ties, sort by deaths
 // if there are ties, sort by hits
 // if there are ties, sort by id
-
-let sortedPlayers = players.sort((a, b) => {
+let sortedPlayers = [...players];
+sortedPlayers.sort((a: Player, b: Player) => {
   if (a.shots > b.shots) {
     return -1;
   } else if (a.shots < b.shots) {
     return 1;
   } else {
     if (a.deaths > b.deaths) {
-      return 1;
-    } else if (a.deaths < b.deaths) {
       return -1;
+    } else if (a.deaths < b.deaths) {
+      return 1;
     } else {
       if (a.hits > b.hits) {
         return -1;
       } else if (a.hits < b.hits) {
         return 1;
       } else {
-        if (a.name > b.name) {
+        if (a.id > b.id) {
           return 1;
-        } else if (a.name < b.name) {
+        } else if (a.id < b.id) {
           return -1;
         } else {
-          return 0;
+          return 1;
         }
       }
     }

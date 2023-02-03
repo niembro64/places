@@ -9,7 +9,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 exports.__esModule = true;
-exports.getDuplicatesIndexes = exports.hasDuplicates = exports.getIndexesOfMax = void 0;
+exports.getIndexesOfMax = void 0;
 var getIndexesOfMax = function (arr) {
     var max = arr[0];
     var maxIndexes = [0];
@@ -36,10 +36,10 @@ var getPositions = function (i) {
     }
     var position = 0;
     while (input.some(function (v) { return v > 0; })) {
-        var indexes = (0, exports.getIndexesOfMax)(input);
+        var i_2 = (0, exports.getIndexesOfMax)(input);
         position++;
-        for (var j = 0; j < indexes.length; j++) {
-            output[indexes[j]] = position;
+        for (var j = 0; j < i_2.length; j++) {
+            output[i_2[j]] = position;
         }
         console.log('p', output);
         console.log('x', input);
@@ -47,33 +47,51 @@ var getPositions = function (i) {
     }
     return output;
 };
-var hasDuplicates = function (array) {
-    return new Set(array).size !== array.length;
-};
-exports.hasDuplicates = hasDuplicates;
-var getDuplicatesIndexes = function (array) {
-    var duplicates = [];
-    var sorted_arr = array.slice().sort();
-    var results = [];
-    for (var i = 0; i < sorted_arr.length - 1; i++) {
-        if (sorted_arr[i + 1] == sorted_arr[i]) {
-            results.push(sorted_arr[i]);
+var players = [
+    { id: 0, shots: 2, deaths: 2, hits: 3 },
+    { id: 1, shots: 2, deaths: 1, hits: 2 },
+    { id: 2, shots: 5, deaths: 2, hits: 2 },
+    { id: 2, shots: 2, deaths: 2, hits: 2 },
+];
+// sort players by shots
+// if there are ties, sort by deaths
+// if there are ties, sort by hits
+// if there are ties, sort by id
+var sortedPlayers = __spreadArray([], players, true);
+sortedPlayers.sort(function (a, b) {
+    if (a.shots > b.shots) {
+        return -1;
+    }
+    else if (a.shots < b.shots) {
+        return 1;
+    }
+    else {
+        if (a.deaths > b.deaths) {
+            return -1;
+        }
+        else if (a.deaths < b.deaths) {
+            return 1;
+        }
+        else {
+            if (a.hits > b.hits) {
+                return -1;
+            }
+            else if (a.hits < b.hits) {
+                return 1;
+            }
+            else {
+                if (a.id > b.id) {
+                    return 1;
+                }
+                else if (a.id < b.id) {
+                    return -1;
+                }
+                else {
+                    return 1;
+                }
+            }
         }
     }
-    return results;
-};
-exports.getDuplicatesIndexes = getDuplicatesIndexes;
-var x = [
-    [2, 2, 3, 1],
-    [1, 2, 2, 4],
-    [2, 2, 2, 2],
-];
-var index = 0;
-var posPlayers = getPositions(x[index]);
-while ((0, exports.hasDuplicates)(posPlayers)) {
-    index++;
-    posPlayers = getPositions(x[index]);
-}
-console.log((0, exports.getDuplicatesIndexes)(x[0]));
-console.log((0, exports.getDuplicatesIndexes)(x[1]));
-console.log((0, exports.getDuplicatesIndexes)(x[2]));
+});
+console.log(players);
+console.log(sortedPlayers);
