@@ -62,9 +62,9 @@ export interface Player {
 }
 
 let players: Player[] = [
-  { id: 0, shots: 2, deaths: 2, hits: 3 },
-  { id: 1, shots: 2, deaths: 1, hits: 2 },
-  { id: 2, shots: 5, deaths: 2, hits: 2 },
+  { id: 3, shots: 5, deaths: 2, hits: 3 },
+  { id: 1, shots: 5, deaths: 1, hits: 2 },
+  { id: 0, shots: 5, deaths: 2, hits: 2 },
   { id: 2, shots: 2, deaths: 2, hits: 2 },
 ];
 
