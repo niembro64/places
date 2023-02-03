@@ -45,11 +45,61 @@ export const hasDuplicates = (array: number[]): boolean => {
   return new Set(array).size !== array.length;
 };
 
-let x: number[][] = [
-  [2, 2, 3, 1],
-  [1, 2, 2, 4],
-  [2, 2, 2, 2],
+// let x: number[][] = [
+//   [2, 2, 3, 1],
+//   [1, 2, 2, 4],
+//   [2, 2, 2, 2],
+// ];
+
+// let index = 0;
+// let posPlayers: number[] = getPositions(x[index]);
+
+export interface Player {
+  id: number;
+  shots: number;
+  deaths: number;
+  hits: number;
+}
+
+let players: Player[] = [
+  { id: 0, shots: 2, deaths: 2, hits: 3 },
+  { id: 1, shots: 2, deaths: 1, hits: 2 },
+  { id: 2, shots: 5, deaths: 2, hits: 2 },
+  { id: 2, shots: 2, deaths: 2, hits: 2 },
 ];
 
-let index = 0;
-let posPlayers: number[] = getPositions(x[index]);
+// sort players by shots
+// if there are ties, sort by deaths
+// if there are ties, sort by hits
+// if there are ties, sort by id
+
+let sortedPlayers = players.sort((a, b) => {
+  if (a.shots > b.shots) {
+    return -1;
+  } else if (a.shots < b.shots) {
+    return 1;
+  } else {
+    if (a.deaths > b.deaths) {
+      return 1;
+    } else if (a.deaths < b.deaths) {
+      return -1;
+    } else {
+      if (a.hits > b.hits) {
+        return -1;
+      } else if (a.hits < b.hits) {
+        return 1;
+      } else {
+        if (a.name > b.name) {
+          return 1;
+        } else if (a.name < b.name) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }
+    }
+  }
+});
+
+console.log(players);
+console.log(sortedPlayers);
